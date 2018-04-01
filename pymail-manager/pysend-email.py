@@ -20,17 +20,67 @@ import tkinter as tk
 ##_session.quit()
 
 
+
+
+
+
+
+def Create_Session() :
+    _session = smtplib.SMTP('smtp.gmail.com',587)
+    _session.starttls()
+
+
+    uname = str(ent_Login_Email.get())
+    pwd = str(ent_Login_Password.get())
+
+
+
+    try :
+        _session.login(uname,pwd)
+    except(smtplib.SMTPAuthenticationError) as e:
+        print("Username Password Incorrect")
+        print(str(e))
+    else:
+        print("Connection Successful")
+    finally:
+        _session.quit()
+        
+
+
+
+
 #INITIALIZE WINDOW
 window = tk.Tk()
 
-window.title("Email Manager")
+window.title("Email Sender")
 window.geometry("400x400")
 
-title = tk.Label(text="Email Manager Tool")
-title.grid();
+#TITLE
+title = tk.Label(text="Email Sender Tool")
+title.grid(column=0,row=0);
 
-btnProcess = tk.Button(text="Process")
-btnProcess.grid(column=0,row=50)
+
+#Label For Email Text Field
+lbl_Login_Email = tk.Label(text="User Name")
+lbl_Login_Email.grid(column=0,row=1)
+
+
+#Login Email Text Field
+ent_Login_Email = tk.Entry()
+ent_Login_Email.grid(column=1,row=1)
+
+
+#Label for Passwod Test Field
+lbl_login_password = tk.Label(text="Password")
+lbl_login_password.grid(row=2,column=0)
+
+#Password Entry Field
+ent_Login_Password = tk.Entry(show="*")
+ent_Login_Password.grid(row=2,column=1)
+
+
+btnProcess = tk.Button(text="Login", command=Create_Session)
+btnProcess.grid(column=1,row=3)
 
 
 window.mainloop()
