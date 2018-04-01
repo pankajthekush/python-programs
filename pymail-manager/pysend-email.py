@@ -23,6 +23,13 @@ import tkinter as tk
 
 
 
+def Connection_Status(isSuccess) :
+    if isSuccess == True:
+        lbl_login_password = tk.Label(text="Connection Successful")
+        lbl_login_password.grid(row=2,column=3)
+    elif isSuccess == False :
+        lbl_login_password = tk.Label(text="Connection Failed")
+        lbl_login_password.grid(row=2,column=3)
 
 
 def Create_Session() :
@@ -40,8 +47,10 @@ def Create_Session() :
     except(smtplib.SMTPAuthenticationError) as e:
         print("Username Password Incorrect")
         print(str(e))
+        Connection_Status(False)
     else:
         print("Connection Successful")
+        Connection_Status(True)
     finally:
         _session.quit()
         
@@ -53,7 +62,7 @@ def Create_Session() :
 window = tk.Tk()
 
 window.title("Email Sender")
-window.geometry("400x400")
+window.geometry("400x500")
 
 #TITLE
 title = tk.Label(text="Email Sender Tool")
@@ -81,6 +90,8 @@ ent_Login_Password.grid(row=2,column=1)
 
 btnProcess = tk.Button(text="Login", command=Create_Session)
 btnProcess.grid(column=1,row=3)
+
+
 
 
 window.mainloop()
