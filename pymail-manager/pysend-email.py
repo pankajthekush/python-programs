@@ -1,4 +1,3 @@
-
 #IMPORT SMTP LIBERARY
 import smtplib
 import tkinter as tk
@@ -7,12 +6,12 @@ import tkinter as tk
 ##_session = smtplib.SMTP('smtp.gmail.com',587)
 ##
 ###START TLS FOR SECURITY
-##_session.starttls() 
+##_session.starttls()
 ##
 ###AUTHENTICATION , IF YOUR ACCOUNT USES 2 STEP VERIFICATION THEN ENTER APP SPESIFIC PASSWORD
 ###https://myaccount.google.com/u/0/security
 ##
-##_session.login("USERNAME","PASSWORD") 
+##_session.login("USERNAME","PASSWORD")
 ##
 ##
 ##_message = "This Is A Message"
@@ -24,9 +23,21 @@ import tkinter as tk
 
 
 def Connection_Status(isSuccess) :
+
+# First Clear the Existing Label
+
+    lbl_login_password = tk.Label(text="")
+    lbl_login_password.grid(row=2,column=3)
+
+
     if isSuccess == True:
         lbl_login_password = tk.Label(text="Connection Successful")
         lbl_login_password.grid(row=2,column=3)
+        #
+        # txtarea = tk.Text(height=20,width=60)
+        # txtarea.grid(column=1,row=3)
+        # btnProcess.grid(column=1,row=4)
+
     elif isSuccess == False :
         lbl_login_password = tk.Label(text="Connection Failed")
         lbl_login_password.grid(row=2,column=3)
@@ -53,7 +64,7 @@ def Create_Session() :
         Connection_Status(True)
     finally:
         _session.quit()
-        
+
 
 
 
@@ -90,8 +101,4 @@ ent_Login_Password.grid(row=2,column=1)
 
 btnProcess = tk.Button(text="Login", command=Create_Session)
 btnProcess.grid(column=1,row=3)
-
-
-
-
 window.mainloop()
