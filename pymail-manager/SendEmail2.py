@@ -1,4 +1,6 @@
 from Forms import Forms
+from EmailApi import LoginToGmail
+lg = LoginToGmail()
 
-frm = Forms()
+frm = Forms(lg)
 frm.LoginForm()
