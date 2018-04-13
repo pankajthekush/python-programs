@@ -14,6 +14,8 @@ class Forms:
         self.loginAPiClass  = loginAPiClass
         self.sender_email_id = None
         self.status = False
+        self.msgSenDTo
+        self.msgBody
 
 
     def LoginForm(self):
@@ -131,6 +133,5 @@ class Forms:
         btn_send_Email = tk.Button(self.root,text="Send Email")
         btn_send_Email.grid(row=4,column=0)
 
-
-
+        self.msgSenDTo = 
         self.root.mainloop()
