@@ -1,0 +1,1 @@
+A simple program to analize speech/text which returns the top n words used in speech/text
