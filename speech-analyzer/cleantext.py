@@ -20,18 +20,18 @@ def cleantagtext(tagtext):
 
 def removewhitespace(intext):
     retext = intext.replace('\r','').replace('\n','')
+    retext = intext.replace('.', ' ') #rEMOVE DECIMAL AND 
+    words = retext.split(' ')
+    words = [t.strip().capitalize() for t in words ]
+    retext = ' '.join(t for t in words if len(t) > 3)
     return retext
-
-def removespecial(intext):
-    rettext = intext.replace('.', ' ')
-    return rettext
 
 def removefromfile(intext):
     
     file = open('avoidwords',"r") 
     words = intext.split(' ')
     rawdata = file.read()
-    ldata = rawdata.split(',')
+    ldata = rawdata.split('#')
 
     for badword in ldata:
         if badword in words:
@@ -40,8 +40,4 @@ def removefromfile(intext):
     intext = ' '.join(t.strip() for t in words)
     
     return intext
-
-def removesinglechar(intext):
-    return intext
-    
 

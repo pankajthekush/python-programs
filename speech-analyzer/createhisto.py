@@ -2,8 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 from cleantext import *
-from processing import createhistogram,showhistogram
+from histoprocess import createhistogram,showhistogram
 from collections import Counter
+from scrapy.crawler import CrawlerProcess
+from scrapepages.scrapepages.spiders.crawlpage import CrawlpageSpider
 
 class GetSpeech():
     def __init__(self, *args, **kwargs):
@@ -11,23 +13,28 @@ class GetSpeech():
    
     def getfromurl(self,url):
 
-        session = requests.Session()
-        response = session.get(url)
-        soup = BeautifulSoup(response.text,'html.parser')
+        process = CrawlerProcess()
+        process.crawl(CrawlpageSpider,start_urls=url)
+        process.start()
+        
+        page = open('output.html', encoding='utf8')
+
+        soup = BeautifulSoup(page.read(),'html.parser')
+
         alltext = soup.find_all(text=True)
         alltext = cleantagtext(alltext)
         speechtext = removewhitespace(alltext)
-        speechtext = removespecial(speechtext)
         speechtext = removefromfile(speechtext)
-        speechtext = removesinglechar(speechtext)
+    
         return speechtext
 
 if __name__ == '__main__':
+    
     cs = GetSpeech()
-    text  = cs.getfromurl(url='http://www.worldfuturefund.org/Articles/Hitler/hitler1939.html')
+    text  = cs.getfromurl(url=['https://webscraper.io/test-sites/e-commerce/allinone'])
     histo = createhistogram(text)
     histo = Counter(histo)
-    toptwenty = histo.most_common(20)
+    toptwenty = histo.most_common(10)
     toptwenty = dict(toptwenty)
     print(toptwenty)
     showhistogram(toptwenty)
