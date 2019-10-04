@@ -12,7 +12,8 @@ class GetSpeech():
         super().__init__(*args, **kwargs)
    
     def getfromurl(self,url):
-
+        
+        
         process = CrawlerProcess()
         process.crawl(CrawlpageSpider,start_urls=url)
         process.start()
@@ -31,10 +32,10 @@ class GetSpeech():
 if __name__ == '__main__':
     
     cs = GetSpeech()
-    text  = cs.getfromurl(url=['https://webscraper.io/test-sites/e-commerce/allinone'])
+    text  = cs.getfromurl(url=['https://www.ndtv.com/world-news/us-president-barack-obamas-farewell-speech-full-text-1647476'])
     histo = createhistogram(text)
     histo = Counter(histo)
-    toptwenty = histo.most_common(10)
+    toptwenty = histo.most_common(30)
     toptwenty = dict(toptwenty)
     print(toptwenty)
     showhistogram(toptwenty)
