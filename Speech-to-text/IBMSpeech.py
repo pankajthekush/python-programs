@@ -43,4 +43,4 @@ def ibmspeech(inputfile):
         speechtotext.recognize_using_websocket(audio=audio_source,content_type='audio/wav',recognize_callback=myallback,model='en-US_BroadbandModel')
         return myallback.transcript
 
-
+print(ibmspeech('test1.wav'))
