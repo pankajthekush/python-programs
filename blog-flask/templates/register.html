@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="content-section"></div>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+                <legend class="border-botton mb-4 ">Join Today</legend>
+                <dir class="form-group">
+                    { { form.username.label(class="form-control-lable") } }
+                    {  { form.username(class= "form-control form-control-lg") }}
+                </dir>
+
+                <dir class="form-group">
+                        { { form.email.label(class="form-control-lable") } }
+                        {  { form.email(class= "form-control form-control-lg") }}
+                </dir>
+
+        </fieldset>
+
+
+    </form>
+
+{% endblock content %}
